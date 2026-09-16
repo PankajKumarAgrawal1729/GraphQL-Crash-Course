@@ -1,0 +1,27 @@
+# Dependency directories
+**/node_modules/
+
+# Logs
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+
+# Environment files
+**/.env
+**/.env.*
+
+# Build output
+**/build/
+**/dist/
+**/coverage/
+
+# Cache and tooling
+**/.cache/
+**/.eslintcache
+
+# Editor and OS files
+**/.vscode/
+**/.idea/
+**/.DS_Store
+**/Thumbs.db
