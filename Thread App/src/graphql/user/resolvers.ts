@@ -1,39 +1,23 @@
-import { prismaClient } from '../../lib/db.js';
+import UserService, { type CreateUserPayload, type GetUserTokenPayload } from '../../services/user.js';
 
 const queries = {
     // Simple health/demo query for testing the GraphQL endpoint.
     hello: () => "Hey there I am a Graphql Query Resolver",
-    say: (_ : any, { name }: { name: string }) => `Hello ${name} Welcome to Thread`
+    say: (_: any, { name }: { name: string }) => `Hello ${name} Welcome to Thread`,
+    getUserToken: async (_: any, payload: GetUserTokenPayload) => {
+        const token = await UserService.getUserToken(payload);
+        return token;
+    }
 };
 
 const mutations = {
     // Persist a new user record in PostgreSQL via Prisma.
     createUser: async (
-        _ : any,
-        {
-            firstName,
-            lastName,
-            email,
-            password
-        }: {
-            firstName: string;
-            lastName: string;
-            email: string;
-            password: string;
-        }
+        _: any,
+        payload: CreateUserPayload
     ) => {
-        const result = await prismaClient.user.create({
-            data: {
-                email,
-                password,
-                firstName,
-                lastName,
-                salt: "random_salt"
-            }
-        });
-
-        console.log("Create Result:", result);
-        return result.id;
+        const user = await UserService.createUser(payload);
+        return user.id;
     }
 };
 
