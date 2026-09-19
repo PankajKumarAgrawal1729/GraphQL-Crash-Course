@@ -6,6 +6,8 @@ export async function createApolloGraphqlServer() {
     // GraphQL schema: query and mutation operations exposed to clients.
         const gqlServer = new ApolloServer({
             typeDefs: `
+                ${User.typeDefs}
+                
                 type Query {
                     ${User.queries}
                 }
